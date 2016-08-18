@@ -1,0 +1,52 @@
+version: '2'
+services:
+  web:
+    image: nginx:alpine
+    ports:
+    - "80:80"
+    volumes:
+    - ./code:/code
+    - ./site.conf:/etc/nginx/conf.d/site.conf
+    networks:
+    - front-tier
+    - back-tier
+  php:
+    image: laravel_pdo_php
+    build: ./php
+    working_dir: /code
+    volumes:
+    - ./code:/code
+    - ./php.ini:/usr/local/etc/php/php.ini
+    networks:
+    - back-tier
+    expose:
+    - "9000"
+  mariadb:
+    image: mariadb:latest
+    ports:
+    - "3306:3306"
+    volumes:
+    - mariadb:/var/lib/mysql
+    networks:
+    - back-tier
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: laravel
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: secret
+    expose:
+    - "3306"
+  redis:
+    image: redis:alpine
+    networks:
+    - back-tier
+    expose:
+    - "6379"
+volumes:
+  mariadb:
+    driver: local
+networks:
+  front-tier:
+    driver: bridge
+  back-tier:
+    driver: bridge

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+echo "uninstalling docker containers..."
+docker-compose down
+
+echo "uninstalling laravel..."
+rm -rf code
+
+echo "uninstalling persistent mariadb storage..."
+docker volume rm ${PWD##*/}_mariadb
+
+#echo "uninstalling laravel_pdo_php docker image..."
+docker rmi laravel_pdo_php
+
+echo "uninstallation complete"

@@ -1,0 +1,37 @@
+#!/bin/bash
+echo "installing and building docker containers..."
+docker-compose up -d
+
+echo "installing laravel/installer via composer..."
+rm -rf code
+if [[ $(composer global show) != *laravel/installer* ]]
+  then
+    composer global require "laravel/installer"
+fi
+
+echo "installing laravel..."
+laravel new code
+
+echo "changing working directory to code..."
+cd code
+
+echo "setting permissions..."
+chmod -R 777 storage bootstrap/cache
+#docker exec ${PWD##*/}_php_1 chgrp -R www-data /code
+#docker exec ${PWD##*/}_php_1 chmod -R 777 storage bootstrap/cache
+
+echo "installing predis..."
+composer require "predis/predis"
+
+echo "installing correct database settings to laravel..."
+sed -i '' "s/DB_HOST=127.0.0.1/DB_HOST=mariadb/" .env
+sed -i '' "s/DB_DATABASE=homestead/DB_DATABASE=laravel/" .env
+sed -i '' "s/DB_USERNAME=homestead/DB_USERNAME=laravel/" .env
+sed -i '' "s/REDIS_HOST=127.0.0.1/REDIS_HOST=redis/" .env
+sed -i '' "s/CACHE_DRIVER=file/CACHE_DRIVER=redis/" .env
+sed -i '' "s/SESSION_DRIVER=file/SESSION_DRIVER=redis/" .env
+
+echo "returning working directory to previous state..."
+cd ..
+
+echo "installation complete"
