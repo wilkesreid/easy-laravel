@@ -12,12 +12,8 @@ laravel new code
 echo "setting permissions..."
 chmod -R 777 code/storage code/bootstrap/cache
 
-echo "installing and building docker containers..."
+echo "installing docker containers..."
 docker-compose up -d
-
-echo "setting permissions inside containers..."
-docker exec ${PWD##*/}_php_1 chown -R www-data:www-data /code
-docker exec ${PWD##*/}_php_1 chmod -R 777 storage bootstrap/cache
 
 echo "changing working directory to code..."
 cd code
