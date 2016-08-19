@@ -27,7 +27,7 @@ Type `./php_shell` to open the PHP terminal so you can use `php artisan` command
 
 Modify `site.conf` to change the nginx configuration, and then run `docker restart laravel_web_1` to apply the changes.
 
-Modify `php.ini` to change the php configuration, and then run `docker restart laravel_php_` to apply the changes.
+Modify `php.ini` to change the php configuration, and then run `docker restart laravel_php_1` to apply the changes.
 
 ## Removing
 
