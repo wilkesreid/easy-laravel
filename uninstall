@@ -10,6 +10,6 @@ echo "uninstalling persistent mariadb storage..."
 docker volume rm ${PWD##*/}_mariadb
 
 #echo "uninstalling laravel_pdo_php docker image..."
-docker rmi laravel_pdo_php
+docker rmi easy_laravel_php
 
 echo "uninstallation complete"
