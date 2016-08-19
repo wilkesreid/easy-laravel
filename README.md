@@ -11,7 +11,7 @@ Get Laravel up and running from the terminal as quickly and easily as possible. 
 ## Requirements
 - [Docker](https://docs.docker.com/engine/installation/) (including docker-compose)
 - [Composer](https://getcomposer.org/download/) cli (not composer.phar)
-- Approx. 900MB storage
+- Approx. 600MB storage
 
 ## Installation
     $ git clone https://github.com/wilkesreid/easy-laravel laravel
@@ -23,11 +23,17 @@ Get Laravel up and running from the terminal as quickly and easily as possible. 
 
 The `code` folder contains the Laravel files.
 
-Type `./php_shell` to open the PHP terminal so you can use `php artisan` commands. If you try to use `php artisan` without typing `./php_shell` first, some features of Laravel won't work, like anything related to the database or cache.
+Typing `./artisan` will allow you to execute artisan commands inside the php container. Trying to `cd code` and then `php artisan` will cause issues, especially when trying to do things related to the database or cache. E.g. `./artisan migrate`; `./artisan cache:clear`
 
-Modify `site.conf` to change the nginx configuration, and then run `docker restart laravel_web_1` to apply the changes.
+Modify `site.conf` to change the nginx configuration, and then run `./reset` to apply the changes.
 
-Modify `php.ini` to change the php configuration, and then run `docker restart laravel_php_1` to apply the changes.
+Modify `php.ini` to change the php configuration, and then run `./reset` to apply the changes.
+
+`./reset` resets nginx and php.
+
+Type `./web_shell` to use the terminal inside the nginx container.
+
+Type `./php_shell` to use the terminal inside the php container.
 
 ## Removing
 
