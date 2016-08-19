@@ -15,12 +15,12 @@ chmod -R 777 code/storage code/bootstrap/cache
 echo "installing and building docker containers..."
 docker-compose up -d
 
+echo "setting permissions inside containers..."
+docker exec ${PWD##*/}_php_1 chown -R www-data:www-data /code
+docker exec ${PWD##*/}_php_1 chmod -R 777 storage bootstrap/cache
+
 echo "changing working directory to code..."
 cd code
-
-echo "setting permissions inside containers..."
-docker exec ${PWD##*/}_php_1 chgrp -R www-data /code
-docker exec ${PWD##*/}_php_1 chmod -R 777 storage bootstrap/cache
 
 echo "installing predis..."
 composer require "predis/predis"
