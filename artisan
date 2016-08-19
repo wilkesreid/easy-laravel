@@ -1,0 +1,2 @@
+#!/bin/bash
+docker exec -t ${PWD##*/}_php_1 php artisan "$@"
