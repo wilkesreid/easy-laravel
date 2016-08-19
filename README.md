@@ -45,5 +45,4 @@ To stop Laravel without permanently deleting it, run `docker-compose down`.
 
 ## Major Issues
 
-- [#1](https://github.com/wilkesreid/easy-laravel/issues/1)
 - [#2](https://github.com/wilkesreid/easy-laravel/issues/2)
