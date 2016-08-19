@@ -9,8 +9,9 @@ Get Laravel up and running from the terminal as quickly and easily as possible. 
 - Redis
 
 ## Requirements
-- [Docker](https://docs.docker.com/engine/installation/)
-- [Composer](https://getcomposer.org/download/)
+- [Docker](https://docs.docker.com/engine/installation/) (including docker-compose)
+- [Composer](https://getcomposer.org/download/) cli (not composer.phar)
+- Approx. 900MB storage
 
 ## Installation
     $ git clone https://github.com/wilkesreid/easy-laravel laravel
@@ -36,6 +37,7 @@ This command will permanently remove everything from your system that was create
 
 To stop Laravel without permanently deleting it, run `docker-compose down`.
 
-## Issues
+## Major Issues
 
-Docker containers have issues when it comes to mounted volumes shared with the host, especially when it comes to user/directory permissions. Laravel requires that the storage and bootstrap/cache directories are writable, but because those directories are being shared between the host and php container, there are issues. The `./install` command sets the permissions to 777 initially so Laravel can get up and running in the first place, but running an artisan command like `php artisan make:auth` will cause Laravel to break. Contributions to this repository attempting to fix this problem will be very welcome.
+[#1](https://github.com/wilkesreid/easy-laravel/issues/1)
+[#2](https://github.com/wilkesreid/easy-laravel/issues/2)
