@@ -11,7 +11,7 @@ services:
     - front-tier
     - back-tier
   php:
-    image: laravel_pdo_php
+    image: easy_laravel_php
     build: ./php
     working_dir: /code
     volumes:
