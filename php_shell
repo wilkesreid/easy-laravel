@@ -1,3 +1,2 @@
 #!/bin/bash
-eval $(docker-machine env default)
-docker exec -it cportal_php_1 bash
+docker exec -it ${PWD##*/}_php_1 /bin/sh
